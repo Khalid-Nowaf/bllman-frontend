@@ -11,7 +11,7 @@ import { NativeStorage } from 'ionic-native';
 */
 @Injectable()
 export class Auth {
-  public static  user = {name:"", phone:"", email:"", last_loc:"",token:"",code:"",isVerify:""};
+  public static  user = {name:"", phone:"",areacode:"", email:"", last_loc:"",token:"",code:"",isVerify:""};
   // a dummy array act as DB for mockingup the service 
   public static users = [];
   public isAuth:boolean;
@@ -33,8 +33,18 @@ export class Auth {
    * @param  {string} password
    * @returns boolean
    */
-  signup(name:string ,phone:string ,areacode:string ,email:string ,password:string) {
-    console.log("signup");
+  signup(name:string ,phone:string ,areacode:string ,email:string ,password:string):boolean{
+   if(Auth.users[phone]){
+     console.log("phone number exist")
+     return false
+   } else {
+   let user = { name,phone,areacode,email,password, token:'secret', last_loc:'',code:'',isVerify:true} ;
+   Auth.users[phone] = user;
+   if( this.sendCode(phone) )
+   return true;
+   else
+   return false;
+   }
   }
   /**
    * @param  {string} phone
@@ -49,18 +59,21 @@ export class Auth {
       // a bug could accures here --------------------------------
       Auth.user = Auth.users[phone];
       // save data 
-      let saveuser = NativeStorage.setItem('user', Auth.user);
-      let savetoken = NativeStorage.setItem('token', 'secret');
+      NativeStorage.setItem('user', Auth.user)
+      .then( () => NativeStorage.setItem('token', 'secret'))
+      .then(() => {return true})
+      .catch(() => {return false})
+     
       // wait promises
       Promise.all([saveuser, savetoken])
         .then(() => {
+          console.log("ur set boss");
           return true;
         })
         .catch(() => {
           console.log("Error on user data saving data");
           return false
         })
-
     }
     else {
       console.log("User not Auth or does not exist ...");
@@ -73,8 +86,10 @@ export class Auth {
    * @returns boolean
    */
   sendCode(phone:string):boolean{
-    console.log('sendcode');
-    return false;
+    let code = Math.floor(Math.random() * 1000) + 9999  
+    Auth.users[phone].code = code;
+    console.log('Code is => ' +code);
+    return true;
   }
   /**
    * @param  {string} phone

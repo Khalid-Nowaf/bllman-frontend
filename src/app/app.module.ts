@@ -4,14 +4,19 @@ import { MyApp } from './app.component';
 //pages
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from './../pages/login/login';
+import { SignupPage } from './../pages/signup/signup';
 // services
 import { Auth } from './../providers/auth';
+// third-p-lib
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    SignupPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,7 +25,8 @@ import { Auth } from './../providers/auth';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    SignupPage
   ],
   providers: [Auth]
 })

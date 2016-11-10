@@ -1,8 +1,10 @@
+import { HomePage } from './../home/home';
 import { Auth } from './../../providers/auth';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup,FormBuilder, Validators} from '@angular/forms';
-
+// pages 
+import { SignupPage } from './../signup/signup';
 /*
   Generated class for the Login page.
 
@@ -16,7 +18,7 @@ import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 export class LoginPage {
 
   loginForm: FormGroup;
-  constructor(public navCtrl: NavController, private fb:FormBuilder,private auth:Auth) {
+  constructor(public vc: NavController, private fb:FormBuilder,private auth:Auth) {
     this.buildForm();
   }
 
@@ -34,13 +36,14 @@ export class LoginPage {
   login() {
     let data = this.loginForm.value;
     if(this.auth.login(data.phone,data.password)) {
-      console.log("OK");
+      this.vc.push(HomePage);
     } else {
       console.log("ERROR");
     }
   }
   signup() {
     console.log("sign in ...");
+    this.vc.push(SignupPage);
   }
 
   forgot() {

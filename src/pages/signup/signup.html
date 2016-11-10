@@ -1,0 +1,65 @@
+<!--
+  Generated template for the Signup page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="signupForm" (ngSubmit)="signup()" autocomplete="false" novalidate > 
+  <ion-list>
+    <!--FULL NAME-->
+    <ion-item>
+      <ion-label floating> Full name </ion-label>
+      <ion-input type='text' formControlName="name" > </ion-input>
+    </ion-item>
+
+    <ion-row>
+
+       <ion-col width-33 >
+        <!--AREA CODE -->
+        <ion-item>
+          <ion-label floating> Area Code </ion-label>
+          <ion-input type='text' maxlength="3" formControlName="areaCode" > </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col width-66>
+        <!--PHONE-->
+        <ion-item>
+          <ion-label floating> Phone number </ion-label>
+          <ion-input type='text' formControlName="phone" > </ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+
+    <!-- Email -->
+    <ion-item>
+      <ion-label floating> Email </ion-label>
+      <ion-input type='email' formControlName="email" > </ion-input>
+    </ion-item>
+    <!-- PASSWORD -->
+    <ion-item>
+      <ion-label floating> Password </ion-label>
+      <ion-input type='password' formControlName="password" > </ion-input>
+    </ion-item>
+
+  </ion-list>
+  <!--SUBMIT-->
+  <div padding>
+    <button ion-button type="submit" [disabled]="!signupForm.valid" outline round block> Signup </button>
+  </div>
+  </form>
+
+
+</ion-content>
