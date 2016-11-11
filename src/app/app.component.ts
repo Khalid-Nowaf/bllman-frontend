@@ -16,8 +16,12 @@ export class MyApp {
   rootPage;
 
   constructor(platform: Platform,private auth:Auth) {
+    
     platform.ready().then(() => {
-      this.rootPage = this.auth.isAuth ? HomePage : LoginPage
+
+      this.auth.AuthInit()
+      .then( ( () => this.rootPage = this.auth.isAuth ? HomePage : LoginPage ))
+      .catch( err => console.log(err));
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();

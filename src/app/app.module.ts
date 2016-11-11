@@ -1,3 +1,4 @@
+import { VerifyPage } from './../pages/verify/verify';
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -15,7 +16,8 @@ import { Auth } from './../providers/auth';
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    VerifyPage
 
   ],
   imports: [
@@ -26,7 +28,8 @@ import { Auth } from './../providers/auth';
     MyApp,
     HomePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    VerifyPage
   ],
   providers: [Auth]
 })

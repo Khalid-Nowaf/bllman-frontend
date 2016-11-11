@@ -1,7 +1,7 @@
 import { HomePage } from './../home/home';
 import { Auth } from './../../providers/auth';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 // pages 
 import { SignupPage } from './../signup/signup';
@@ -18,7 +18,8 @@ import { SignupPage } from './../signup/signup';
 export class LoginPage {
 
   loginForm: FormGroup;
-  constructor(public vc: NavController, private fb:FormBuilder,private auth:Auth) {
+  constructor(public vc: NavController, private fb:FormBuilder,private auth:Auth,
+  private tc: ToastController, private lc:LoadingController) {
     this.buildForm();
   }
 
@@ -34,12 +35,31 @@ export class LoginPage {
   }
 
   login() {
+    let loading = this.lc.create({
+                  content: 'Please wait...'
+                  });
+    loading.present()
     let data = this.loginForm.value;
-    if(this.auth.login(data.phone,data.password)) {
-      this.vc.push(HomePage);
-    } else {
-      console.log("ERROR");
-    }
+    this.auth.login(data.phone,data.password)
+    .then(msg => {
+      loading.dismiss();
+      this.tc.create({
+        message: msg,
+        duration: 10000,
+        position: 'top',
+        showCloseButton: true
+      }).present();
+      this.vc.push(HomePage); 
+    })
+    .catch(errmsg => { 
+       loading.dismiss();
+        this.tc.create({
+        message: errmsg,
+        duration: 10000,
+        position: 'top',
+        showCloseButton: true
+      }).present();
+    });
   }
   signup() {
     console.log("sign in ...");
