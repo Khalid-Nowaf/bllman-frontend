@@ -1,0 +1,39 @@
+<ion-menu [content]="content">
+    <ion-content>
+        <ion-list  >
+           <!--HOME-->
+            <button ion-item (click)="openPage(home)">
+                <ion-icon name="home"></ion-icon> HOME
+            </button>
+            <!--MY ORDERS-->
+             <button ion-item (click)="openPage(myOrders)">
+                <ion-icon name="cube"></ion-icon> My ORDERS
+            </button>
+            <!--MY ACCOUNT-->
+             <button ion-item (click)="openPage(myAccount)">
+                <ion-icon name="card"></ion-icon> MY ACCOUNT
+            </button>
+             <!--SETTINGS-->
+            <button ion-item (click)="openPage(settings)">
+                <ion-icon name="settings"></ion-icon> SETTINGS
+            </button>
+           <!--ABOUT US-->
+            <button ion-item (click)="about()">
+                <ion-icon name="information-circle"></ion-icon> ABOUT US
+            </button>
+            <!--CALL US-->
+            <button ion-item (click)="call()">
+                <ion-icon name="call"></ion-icon> CALL US
+            </button>
+            <!--RATE OUT APP-->
+            <button ion-item (click)="rate()">
+                <ion-icon name="star"></ion-icon> RATE OUR APP
+            </button>
+            <!--LOG OUT-->
+            <button ion-item (click)="logout()">
+                 <ion-icon name="unlock"></ion-icon> LOG OUT
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav  #content [root]="rootPage"></ion-nav>

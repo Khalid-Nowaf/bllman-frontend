@@ -1,10 +1,12 @@
-import { HomePage } from './../home/home';
-import { Auth } from './../../providers/auth';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { FormGroup,FormBuilder, Validators} from '@angular/forms';
 // pages 
 import { SignupPage } from './../signup/signup';
+import { ForgotPage } from './../forgot/forgot';
+import { HomePage } from './../home/home';
+// service
+import { Auth } from './../../providers/auth';
 /*
   Generated class for the Login page.
 
@@ -49,7 +51,7 @@ export class LoginPage {
         position: 'top',
         showCloseButton: true
       }).present();
-      this.vc.push(HomePage); 
+      this.vc.setRoot(HomePage,{animate: true, direction: 'forward'}); 
     })
     .catch(errmsg => { 
        loading.dismiss();
@@ -67,7 +69,7 @@ export class LoginPage {
   }
 
   forgot() {
-    console.log('forgot password');
+   this.vc.push(ForgotPage);
   }
 
 }
